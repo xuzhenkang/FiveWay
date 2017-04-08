@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ChessBoard extends JPanel implements MouseListener {
-
+	private static final long serialVersionUID = 1L;
 	public static final int MARGIN = 40; // 边距
 	public static final int GRID_SPAN = 50; // 网格间距
 	public static final int ROWS = 4; // 棋盘行数

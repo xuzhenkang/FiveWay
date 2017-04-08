@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class StartChessJFrame extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private ChessBoard chessBoard;
 	private JPanel toolbar;
 	private JButton startButton, backButton, exitButton, showButton;
