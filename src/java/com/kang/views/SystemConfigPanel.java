@@ -1,4 +1,4 @@
-package kang.views;
+package com.kang.views;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import kang.util.I18NUtil;
-import kang.util.NetWorkUtil;
+import com.kang.util.I18NUtil;
+import com.kang.util.NetWorkUtil;
 
 public class SystemConfigPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class SystemConfigPanel extends JPanel {
 		ipAddrField.setEnabled(false);
 		ipAddrPanel.add(ipAddrField);
 
-		/* 对战模式 */
+		/* 瀵规垬妯″紡 */
 		patternPanel = new JPanel();
 		patternLabel = new JLabel(i18nUtil.getText("versus"));
 		netPattern = new JRadioButton(i18nUtil.getText("networkModel"));

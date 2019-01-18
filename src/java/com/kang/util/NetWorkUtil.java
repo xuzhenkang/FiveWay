@@ -1,4 +1,4 @@
-package kang.util;
+package com.kang.util;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -8,7 +8,7 @@ import java.util.Enumeration;
 public class NetWorkUtil {
 
 	/**
-	 * »ñÈ¡±¾»úIP
+	 * è·å–æœ¬æœºIP
 	 */
 	public static String getIPAddr() {
 		 try {
@@ -21,18 +21,18 @@ public class NetWorkUtil {
 	private static InetAddress getLocalHostLANAddress() throws UnknownHostException {
 	    try {
 	        InetAddress candidateAddress = null;
-	        // ±éÀúËùÓĞµÄÍøÂç½Ó¿Ú
+	        // éå†æ‰€æœ‰çš„ç½‘ç»œæ¥å£
 	        for (Enumeration<NetworkInterface> ifaces = NetworkInterface.getNetworkInterfaces(); ifaces.hasMoreElements();) {
 	            NetworkInterface iface = (NetworkInterface) ifaces.nextElement();
-	            // ÔÚËùÓĞµÄ½Ó¿ÚÏÂÔÙ±éÀúIP
+	            // åœ¨æ‰€æœ‰çš„æ¥å£ä¸‹å†éå†IP
 	            for (Enumeration<InetAddress> inetAddrs = iface.getInetAddresses(); inetAddrs.hasMoreElements();) {
 	                InetAddress inetAddr = (InetAddress) inetAddrs.nextElement();
-	                if (!inetAddr.isLoopbackAddress()) {// ÅÅ³ıloopbackÀàĞÍµØÖ·
+	                if (!inetAddr.isLoopbackAddress()) {// æ’é™¤loopbackç±»å‹åœ°å€
 	                    if (inetAddr.isSiteLocalAddress()) {
-	                        // Èç¹ûÊÇsite-localµØÖ·£¬¾ÍÊÇËüÁË
+	                        // å¦‚æœæ˜¯site-localåœ°å€ï¼Œå°±æ˜¯å®ƒäº†
 	                        return inetAddr;
 	                    } else if (candidateAddress == null) {
-	                        // site-localÀàĞÍµÄµØÖ·Î´±»·¢ÏÖ£¬ÏÈ¼ÇÂ¼ºòÑ¡µØÖ·
+	                        // site-localç±»å‹çš„åœ°å€æœªè¢«å‘ç°ï¼Œå…ˆè®°å½•å€™é€‰åœ°å€
 	                        candidateAddress = inetAddr;
 	                    }
 	                }
@@ -41,7 +41,7 @@ public class NetWorkUtil {
 	        if (candidateAddress != null) {
 	            return candidateAddress;
 	        }
-	        // Èç¹ûÃ»ÓĞ·¢ÏÖ non-loopbackµØÖ·.Ö»ÄÜÓÃ×î´ÎÑ¡µÄ·½°¸
+	        // å¦‚æœæ²¡æœ‰å‘ç° non-loopbackåœ°å€.åªèƒ½ç”¨æœ€æ¬¡é€‰çš„æ–¹æ¡ˆ
 	        InetAddress jdkSuppliedAddress = InetAddress.getLocalHost();
 	        if (jdkSuppliedAddress == null) {
 	            throw new UnknownHostException("The JDK InetAddress.getLocalHost() method unexpectedly returned null.");

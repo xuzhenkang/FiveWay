@@ -1,4 +1,4 @@
-package kang.util;
+package com.kang.util;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -14,7 +14,7 @@ public class I18NUtil {
 	}
 	
 	public static I18NUtil getInstance(String resourceFile) {
-		// TODO 读取配置文件，以确定locale
+		// TODO 璇诲彇閰嶇疆鏂囦欢锛屼互纭畾locale
 		
 		
 		return new I18NUtil(resourceFile, Locale.getDefault());

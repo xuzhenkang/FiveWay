@@ -1,4 +1,4 @@
-package kang.views;
+package com.kang.views;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -31,7 +31,7 @@ public class StartChessJFrame extends JFrame {
 
 		Container contentPane = this.getContentPane();
 		contentPane.add(chessBoard);
-		chessBoard.setOpaque(true); // ÉèÖÃÊÇ·ñ²»Í¸Ã÷£¬true²»Í¸Ã÷£¬falseÍ¸Ã÷
+		chessBoard.setOpaque(true); // è®¾ç½®æ˜¯å¦ä¸é€æ˜ï¼Œtrueä¸é€æ˜ï¼Œfalseé€æ˜
 
 		/* initialize ActionListener */
 		ButtonItemListener lis = new ButtonItemListener();
@@ -86,12 +86,12 @@ public class StartChessJFrame extends JFrame {
 		this.setTitle("Five way!");
 		this.setJMenuBar(menuBar);
 		this.add(toolbar, BorderLayout.SOUTH);
-		this.add(chessBoard);// ½«Ãæ°åÌí¼Óµ½´°ÌåÉÏ
+		this.add(chessBoard);// å°†é¢æ¿æ·»åŠ åˆ°çª—ä½“ä¸Š
 
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				try {
-					if (JOptionPane.showConfirmDialog(null, "ÊÇ·ñÍË³ö?", "ÌáÊ¾",
+					if (JOptionPane.showConfirmDialog(null, "æ˜¯å¦é€€å‡º?", "æç¤º",
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 						System.exit(0);

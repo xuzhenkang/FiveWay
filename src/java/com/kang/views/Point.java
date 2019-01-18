@@ -1,4 +1,4 @@
-package kang.views;
+package com.kang.views;
 
 import java.awt.Color;
 import java.util.LinkedList;
@@ -7,11 +7,11 @@ public class Point {
 	private int x;
 	private int y;
 	private Color color;
-	private boolean isSelected; // ÓĞÃ»ÓĞ±»Ñ¡ÖĞ
-	private boolean isDead; // ÓĞÃ»ÓĞ±»³Ôµô£¬±»³ÔµôÎªtrue
+	private boolean isSelected; // æœ‰æ²¡æœ‰è¢«é€‰ä¸­
+	private boolean isDead; // æœ‰æ²¡æœ‰è¢«åƒæ‰ï¼Œè¢«åƒæ‰ä¸ºtrue
 	public static final int DIAMETER = 30;
-	private LinkedList<PointRecord> pointTrack = new LinkedList<PointRecord>(); // ¸ÃÆå×Ó¹ì¼£
-	private int index;// ÔÚchessListÖĞµÄË÷Òı
+	private LinkedList<PointRecord> pointTrack = new LinkedList<PointRecord>(); // è¯¥æ£‹å­è½¨è¿¹
+	private int index;// åœ¨chessListä¸­çš„ç´¢å¼•
 
 	public Point(int x, int y, Color color) {
 		this.x = x;
@@ -78,7 +78,7 @@ public class Point {
 				+ ",isSelected:" + isSelected + ",color:" + color + "]";
 	}
 
-	// Ã¿²½Êı¾İ¼ÇÂ¼
+	// æ¯æ­¥æ•°æ®è®°å½•
 	class PointRecord {
 		int x;
 		int y;

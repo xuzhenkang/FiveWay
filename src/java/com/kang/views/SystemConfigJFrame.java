@@ -1,4 +1,4 @@
-package kang.views;
+package com.kang.views;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import javax.swing.JFrame;
 
-import kang.util.I18NUtil;
+import com.kang.util.I18NUtil;
 
 public class SystemConfigJFrame extends JFrame {
 	
@@ -14,7 +14,7 @@ public class SystemConfigJFrame extends JFrame {
 	
 	private I18NUtil i18nUtil = I18NUtil.getInstance("SystemConfig");
 	
-	private JFrame parentFrame; // ∏∏¥∞ø⁄
+	private JFrame parentFrame; // Áà∂Á™óÂè£
 	private SystemConfigPanel systemConfigPanel;
 
 	

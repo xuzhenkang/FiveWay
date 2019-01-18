@@ -1,4 +1,4 @@
-package kang;
+package com.kang;
 
 public class CoreAlgthm {
 
