@@ -1,4 +1,4 @@
-package kang;
+package kang.views;
 
 import java.awt.Color;
 import java.util.LinkedList;

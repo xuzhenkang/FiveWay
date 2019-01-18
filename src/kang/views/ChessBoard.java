@@ -1,4 +1,4 @@
-package kang;
+package kang.views;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -66,6 +66,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 		return endangeredBlackChessNum;
 	}
 
+	@SuppressWarnings("unused")
 	private void setEndangeredBlackChessNum(int endangeredBlackChessNum) {
 		this.endangeredBlackChessNum = endangeredBlackChessNum;
 	}
@@ -74,6 +75,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 		return endangeredWhiteChessNum;
 	}
 
+	@SuppressWarnings("unused")
 	private void setEndangeredWhiteChessNum(int endangeredWhiteChessNum) {
 		this.endangeredWhiteChessNum = endangeredWhiteChessNum;
 	}
@@ -86,7 +88,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 				System.out.println(c);
 				n++;
 			}
-			System.out.println();
+			System.out.println("::: n = " + n);
 		} else {
 			System.out.println("track.size = 0");
 		}
@@ -122,8 +124,8 @@ public class ChessBoard extends JPanel implements MouseListener {
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				int x1 = (e.getX() - MARGIN + GRID_SPAN / 2) / GRID_SPAN;
-				int y1 = (e.getY() - MARGIN + GRID_SPAN / 2) / GRID_SPAN;
+//				int x1 = (e.getX() - MARGIN + GRID_SPAN / 2) / GRID_SPAN;
+//				int y1 = (e.getY() - MARGIN + GRID_SPAN / 2) / GRID_SPAN;
 			}
 
 			@Override

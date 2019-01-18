@@ -1,4 +1,4 @@
-package kang;
+package kang.views;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -23,7 +23,7 @@ public class StartChessJFrame extends JFrame {
 	private JButton startButton, backButton, exitButton, showButton;
 	private JMenu sysMenu;
 	private JMenuBar menuBar;
-	private JMenuItem startMenuItem, exitMenuItem, backMenuItem, showMenuItem;
+	private JMenuItem startMenuItem, exitMenuItem, backMenuItem, showMenuItem, configMenuItem;
 
 	public StartChessJFrame() {
 
@@ -41,12 +41,14 @@ public class StartChessJFrame extends JFrame {
 		exitMenuItem = new JMenuItem("Exit");
 		backMenuItem = new JMenuItem("Back");
 		showMenuItem = new JMenuItem("Show");
+		configMenuItem = new JMenuItem("Config");
 
 		/* add ActionListeners to MenuItems */
 		startMenuItem.addActionListener(lis);
 		exitMenuItem.addActionListener(lis);
 		backMenuItem.addActionListener(lis);
 		showMenuItem.addActionListener(lis);
+		configMenuItem.addActionListener(lis);
 
 		/* initialize JMenu and add MenuItems to it */
 		sysMenu = new JMenu("System");
@@ -54,6 +56,7 @@ public class StartChessJFrame extends JFrame {
 		sysMenu.add(exitMenuItem);
 		sysMenu.add(backMenuItem);
 		sysMenu.add(showMenuItem);
+		sysMenu.add(configMenuItem);
 
 		/* initialize JMenuBar and add JMenu to it */
 		menuBar = new JMenuBar();
@@ -101,7 +104,8 @@ public class StartChessJFrame extends JFrame {
 
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(300, 380);
+		this.setSize(290, 380);
+		this.setResizable(false);
 		// this.pack();
 		this.setLocationRelativeTo(null);
 	}
@@ -129,6 +133,9 @@ public class StartChessJFrame extends JFrame {
 				chessBoard.traverseTrack();
 				// System.out.println(chessBoard.track.getLast().p);
 				// System.out.println(chessBoard.track.size());
+			} else if (obj == StartChessJFrame.this.configMenuItem) {
+				StartChessJFrame.this.setEnabled(false);
+				new SystemConfigJFrame(StartChessJFrame.this);
 			}
 		}
 	}
