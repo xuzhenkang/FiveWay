@@ -5,23 +5,27 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
+import com.kang.entities.SystemConfig;
 import com.kang.util.I18NUtil;
 
 public class SystemConfigJFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
+	private SystemConfig systemConfig;
 	
-	private I18NUtil i18nUtil = I18NUtil.getInstance("SystemConfig");
 	
-	private JFrame parentFrame; // 父窗口
+	private I18NUtil i18nUtil;
+	
+	private StartChessJFrame parentFrame; // 父窗口
 	private SystemConfigPanel systemConfigPanel;
 
-	
-	public SystemConfigJFrame(JFrame parentFrame) {
+	public SystemConfigJFrame(StartChessJFrame parentFrame) {
 
 		this.parentFrame = parentFrame;
+		this.systemConfig = parentFrame.getSystemConfig();
+		this.i18nUtil = I18NUtil.getInstance("SystemConfig", this.systemConfig.getLanguage());
 		
-		systemConfigPanel = new SystemConfigPanel();
+		systemConfigPanel = new SystemConfigPanel(this);
 		this.add(systemConfigPanel);
 		this.setTitle(i18nUtil.getText("settings"));
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -31,9 +35,15 @@ public class SystemConfigJFrame extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				SystemConfigJFrame.this.parentFrame.setEnabled(true);
-				SystemConfigJFrame.this.setVisible(false);
+				SystemConfigJFrame.this.dispose();
 			}
 		});
 		this.setVisible(true);
+	}
+	public StartChessJFrame getParentFrame() {
+		return parentFrame;
+	}
+	public SystemConfig getSystemConfig() {
+		return systemConfig;
 	}
 }

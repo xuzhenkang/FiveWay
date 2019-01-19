@@ -21,7 +21,7 @@ import com.kang.util.I18NUtil;
 public class ChessBoard extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 	
-	private I18NUtil i18nUtil = I18NUtil.getInstance("ChessBoard");
+	private I18NUtil i18nUtil;
 	
 	public static final int MARGIN = 40; // 边距
 	public static final int GRID_SPAN = 50; // 网格间距
@@ -120,7 +120,9 @@ public class ChessBoard extends JPanel implements MouseListener {
 	Image shadows;
 	Color colortemp;
 
-	public ChessBoard() {
+	public ChessBoard(StartChessJFrame parentJFrame) {
+		this.i18nUtil = I18NUtil.getInstance("ChessBoard", parentJFrame.getSystemConfig().getLanguage());
+		
 		img = Toolkit.getDefaultToolkit().getImage("images/board.jpg");
 		shadows = Toolkit.getDefaultToolkit().getImage("shadows.jpg");
 		/* 初始化棋子 */

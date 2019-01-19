@@ -7,6 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,12 +20,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.kang.entities.SystemConfig;
 import com.kang.util.I18NUtil;
 
 public class StartChessJFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
-	private I18NUtil i18nUtil = I18NUtil.getInstance("StartChess");
+	private String systemConfigPath = "SystemConfig.obj";
+	private SystemConfig systemConfig = new SystemConfig();
+	private I18NUtil i18nUtil;
 	
 	private ChessBoard chessBoard;
 	private JPanel toolbar;
@@ -30,10 +37,33 @@ public class StartChessJFrame extends JFrame {
 	private JMenuBar menuBar;
 	private JMenuItem startMenuItem, exitMenuItem, backMenuItem, showMenuItem, configMenuItem;
 
+	private void init() {
+		File configFile = new File(systemConfigPath);
+		if (configFile.exists()) {
+			ObjectInputStream ois = null;
+			try {
+				ois = new ObjectInputStream(new FileInputStream(configFile));
+				this.systemConfig = (SystemConfig) ois.readObject();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					ois.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		this.i18nUtil = I18NUtil.getInstance("StartChess",
+				this.systemConfig.getLanguage());
+	}
+	
 	public StartChessJFrame() {
-
-		chessBoard = new ChessBoard();
-
+		/*initialize Configuration*/
+		this.init();
+		chessBoard = new ChessBoard(this);
 		Container contentPane = this.getContentPane();
 		contentPane.add(chessBoard);
 		chessBoard.setOpaque(true); // 设置是否不透明，true不透明，false透明
@@ -69,8 +99,8 @@ public class StartChessJFrame extends JFrame {
 
 		/* initialize JButtons */
 		startButton = new JButton(i18nUtil.getText("start"));
-		backButton = new JButton(i18nUtil.getText("exit"));
-		exitButton = new JButton(i18nUtil.getText("back"));
+		backButton = new JButton(i18nUtil.getText("back"));
+		exitButton = new JButton(i18nUtil.getText("exit"));
 		showButton = new JButton(i18nUtil.getText("show"));
 
 		/* add ActionListener to JButtons */
@@ -139,6 +169,13 @@ public class StartChessJFrame extends JFrame {
 				new SystemConfigJFrame(StartChessJFrame.this);
 			}
 		}
+	}
+	public String getSystemConfigPath() {
+		return systemConfigPath;
+	}
+
+	public SystemConfig getSystemConfig() {
+		return systemConfig;
 	}
 
 	public static void main(String[] args) {

@@ -23,6 +23,15 @@ public class I18NUtil {
 	public static I18NUtil getInstance(String resourceFile, Locale locale) {
 		return new I18NUtil(resourceFile, locale);
 	}
+	public static I18NUtil getInstance(String resourceFile, String language) {
+		if ("chinese".equals(language)) {
+			return new I18NUtil(resourceFile, Locale.SIMPLIFIED_CHINESE);
+		} else if ("english".equals(language)) {
+			return new I18NUtil(resourceFile, Locale.US);
+		} else {
+			return getInstance(resourceFile);
+		}
+	}
 	
 	public String getText(String key) {
 		return bundle.getString(key);
