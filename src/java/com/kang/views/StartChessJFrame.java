@@ -16,8 +16,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.kang.util.I18NUtil;
+
 public class StartChessJFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
+	
+	private I18NUtil i18nUtil = I18NUtil.getInstance("StartChess");
+	
 	private ChessBoard chessBoard;
 	private JPanel toolbar;
 	private JButton startButton, backButton, exitButton, showButton;
@@ -37,11 +42,11 @@ public class StartChessJFrame extends JFrame {
 		ButtonItemListener lis = new ButtonItemListener();
 
 		/* initialize MenuItems */
-		startMenuItem = new JMenuItem("Restart");
-		exitMenuItem = new JMenuItem("Exit");
-		backMenuItem = new JMenuItem("Back");
-		showMenuItem = new JMenuItem("Show");
-		configMenuItem = new JMenuItem("Config");
+		startMenuItem = new JMenuItem(i18nUtil.getText("start"));
+		exitMenuItem = new JMenuItem(i18nUtil.getText("exit"));
+		backMenuItem = new JMenuItem(i18nUtil.getText("back"));
+		showMenuItem = new JMenuItem(i18nUtil.getText("show"));
+		configMenuItem = new JMenuItem(i18nUtil.getText("config"));
 
 		/* add ActionListeners to MenuItems */
 		startMenuItem.addActionListener(lis);
@@ -51,7 +56,7 @@ public class StartChessJFrame extends JFrame {
 		configMenuItem.addActionListener(lis);
 
 		/* initialize JMenu and add MenuItems to it */
-		sysMenu = new JMenu("System");
+		sysMenu = new JMenu(i18nUtil.getText("sysMenu"));
 		sysMenu.add(startMenuItem);
 		sysMenu.add(exitMenuItem);
 		sysMenu.add(backMenuItem);
@@ -63,10 +68,10 @@ public class StartChessJFrame extends JFrame {
 		menuBar.add(sysMenu);
 
 		/* initialize JButtons */
-		startButton = new JButton("Restart");
-		backButton = new JButton("Back");
-		exitButton = new JButton("Exit");
-		showButton = new JButton("Show");
+		startButton = new JButton(i18nUtil.getText("start"));
+		backButton = new JButton(i18nUtil.getText("exit"));
+		exitButton = new JButton(i18nUtil.getText("back"));
+		showButton = new JButton(i18nUtil.getText("show"));
 
 		/* add ActionListener to JButtons */
 		startButton.addActionListener(lis);
@@ -83,7 +88,7 @@ public class StartChessJFrame extends JFrame {
 		toolbar.add(showButton);
 
 		/* set the windows */
-		this.setTitle("Five way!");
+		this.setTitle(i18nUtil.getText("title"));
 		this.setJMenuBar(menuBar);
 		this.add(toolbar, BorderLayout.SOUTH);
 		this.add(chessBoard);// 将面板添加到窗体上
@@ -91,7 +96,7 @@ public class StartChessJFrame extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				try {
-					if (JOptionPane.showConfirmDialog(null, "是否退出?", "提示",
+					if (JOptionPane.showConfirmDialog(null, i18nUtil.getText("exitMessage"), i18nUtil.getText("alert"),
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 						System.exit(0);
@@ -117,19 +122,15 @@ public class StartChessJFrame extends JFrame {
 			Object obj = e.getSource(); // to get source of action
 			if (obj == StartChessJFrame.this.startMenuItem
 					|| obj == StartChessJFrame.this.startButton) {
-				// System.out.println("Restart");
 				chessBoard.restartGame();
 			} else if (obj == StartChessJFrame.this.backMenuItem
 					|| obj == StartChessJFrame.this.backButton) {
-				// System.out.println("Back");
 				chessBoard.goBack();
 			} else if (obj == StartChessJFrame.this.exitMenuItem
 					|| obj == StartChessJFrame.this.exitButton) {
-				// System.out.println("Exit");
 				chessBoard.exit();
 			} else if (obj == StartChessJFrame.this.showMenuItem
 					|| obj == StartChessJFrame.this.showButton) {
-				System.out.println("ShowMessage");
 				chessBoard.traverseTrack();
 				// System.out.println(chessBoard.track.getLast().p);
 				// System.out.println(chessBoard.track.size());

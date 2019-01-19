@@ -2,7 +2,6 @@ package com.kang.views;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Locale;
 
 import javax.swing.JFrame;
 

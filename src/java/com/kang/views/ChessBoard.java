@@ -16,8 +16,13 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.kang.util.I18NUtil;
+
 public class ChessBoard extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
+	
+	private I18NUtil i18nUtil = I18NUtil.getInstance("ChessBoard");
+	
 	public static final int MARGIN = 40; // 边距
 	public static final int GRID_SPAN = 50; // 网格间距
 	public static final int ROWS = 4; // 棋盘行数
@@ -216,7 +221,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 		// 游戏结束时，不再能下
 		if (gameOver)
 			return;
-		String colorName = isBlack ? "黑棋" : "白棋";
+		String colorName = isBlack ? i18nUtil.getText("black") : i18nUtil.getText("white");
 		// 将鼠标点击的坐标位置转换成网格索引
 		xIndex = (e.getX() - MARGIN + GRID_SPAN / 2) / GRID_SPAN;
 		yIndex = (e.getY() - MARGIN + GRID_SPAN / 2) / GRID_SPAN;
@@ -263,8 +268,8 @@ public class ChessBoard extends JPanel implements MouseListener {
 					selectedPoint.getY(), xIndex, yIndex);
 			this.repaint();
 			if (isWin(isBlack)) {
-				String msg = String.format("恭喜，%s赢了！", colorName);
-				JOptionPane.showMessageDialog(this, msg);
+				String msg = String.format(i18nUtil.getText("congratulations") + " %s " + i18nUtil.getText("win"), colorName);
+				JOptionPane.showMessageDialog(this, msg, i18nUtil.getText("alert"),JOptionPane.INFORMATION_MESSAGE);
 				gameOver = true;
 			}
 			isBlack = !isBlack;
@@ -476,7 +481,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 	/* 悔棋 */
 	public void goBack() {
 		if (gameOver) {
-			JOptionPane.showMessageDialog(this, "游戏已经结束无法悔棋！");
+			JOptionPane.showMessageDialog(this, i18nUtil.getText("cannotBack"));
 			return;
 		}
 
@@ -501,14 +506,14 @@ public class ChessBoard extends JPanel implements MouseListener {
 			this.repaint();
 			isBlack = !isBlack;
 		} else {
-			JOptionPane.showMessageDialog(this, "此时无法悔棋！");
+			JOptionPane.showMessageDialog(this, i18nUtil.getText("cannotBackAtMoment"));
 			return;
 		}
 	}
 
 	/* 退出 */
 	public void exit() {
-		int n = JOptionPane.showConfirmDialog(this, "真的 要退出吗？", "exit",
+		int n = JOptionPane.showConfirmDialog(this, i18nUtil.getText("quitEnsure"), i18nUtil.getText("exit"),
 				JOptionPane.YES_NO_OPTION);
 		if (n == JOptionPane.YES_OPTION) {
 			System.exit(0);
