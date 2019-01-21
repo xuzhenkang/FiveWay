@@ -30,7 +30,7 @@ public class SystemConfigJFrame extends JFrame {
 		this.setTitle(i18nUtil.getText("settings"));
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(320, 220);
-//		this.setResizable(false);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {

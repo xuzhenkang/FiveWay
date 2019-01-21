@@ -25,11 +25,11 @@ import com.kang.util.I18NUtil;
 
 public class StartChessJFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String systemConfigPath = "SystemConfig.obj";
 	private SystemConfig systemConfig = new SystemConfig();
 	private I18NUtil i18nUtil;
-	
+
 	private ChessBoard chessBoard;
 	private JPanel toolbar;
 	private JButton startButton, backButton, exitButton, showButton;
@@ -56,12 +56,11 @@ public class StartChessJFrame extends JFrame {
 				}
 			}
 		}
-		this.i18nUtil = I18NUtil.getInstance("StartChess",
-				this.systemConfig.getLanguage());
+		this.i18nUtil = I18NUtil.getInstance("StartChess", this.systemConfig.getLanguage());
 	}
-	
+
 	public StartChessJFrame() {
-		/*initialize Configuration*/
+		/* initialize Configuration */
 		this.init();
 		chessBoard = new ChessBoard(this);
 		Container contentPane = this.getContentPane();
@@ -127,8 +126,7 @@ public class StartChessJFrame extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				try {
 					if (JOptionPane.showConfirmDialog(null, i18nUtil.getText("exitMessage"), i18nUtil.getText("alert"),
-							JOptionPane.YES_NO_OPTION,
-							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 						System.exit(0);
 					}
 				} catch (Exception ee) {
@@ -150,17 +148,13 @@ public class StartChessJFrame extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource(); // to get source of action
-			if (obj == StartChessJFrame.this.startMenuItem
-					|| obj == StartChessJFrame.this.startButton) {
+			if (obj == StartChessJFrame.this.startMenuItem || obj == StartChessJFrame.this.startButton) {
 				chessBoard.restartGame();
-			} else if (obj == StartChessJFrame.this.backMenuItem
-					|| obj == StartChessJFrame.this.backButton) {
+			} else if (obj == StartChessJFrame.this.backMenuItem || obj == StartChessJFrame.this.backButton) {
 				chessBoard.goBack();
-			} else if (obj == StartChessJFrame.this.exitMenuItem
-					|| obj == StartChessJFrame.this.exitButton) {
+			} else if (obj == StartChessJFrame.this.exitMenuItem || obj == StartChessJFrame.this.exitButton) {
 				chessBoard.exit();
-			} else if (obj == StartChessJFrame.this.showMenuItem
-					|| obj == StartChessJFrame.this.showButton) {
+			} else if (obj == StartChessJFrame.this.showMenuItem || obj == StartChessJFrame.this.showButton) {
 				chessBoard.traverseTrack();
 				// System.out.println(chessBoard.track.getLast().p);
 				// System.out.println(chessBoard.track.size());
@@ -170,6 +164,7 @@ public class StartChessJFrame extends JFrame {
 			}
 		}
 	}
+
 	public String getSystemConfigPath() {
 		return systemConfigPath;
 	}

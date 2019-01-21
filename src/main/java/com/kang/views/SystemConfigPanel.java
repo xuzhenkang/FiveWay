@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.Arrays;
 import java.util.Locale;
 
 import javax.swing.AbstractButton;
@@ -165,13 +164,9 @@ public class SystemConfigPanel extends JPanel {
 				if (versusRadioButton.isSelected() && "networkModel".equals(versusRadioButton.getName())) {
 					ipAddrField.setEnabled(true);
 					SystemConfigPanel.this.systemConfig.setVersus("networkModel");
-//					SystemConfigPanel.this.systemConfig.versusIndex = Arrays
-//							.asList(SystemConfigPanel.this.systemConfig.versusValues).indexOf("networkModel");
 				} else if (versusRadioButton.isSelected() && "localModel".equals(versusRadioButton.getName())) {
 					ipAddrField.setEnabled(false);
 					SystemConfigPanel.this.systemConfig.setVersus("localModel");
-//					SystemConfigPanel.this.systemConfig.versusIndex = Arrays
-//							.asList(SystemConfigPanel.this.systemConfig.versusValues).indexOf("localModel");
 				}
 			} else if (obj == SystemConfigPanel.this.saveButton) {
 				SystemConfigPanel.this.systemConfig.setVersus(this.getSelected(SystemConfigPanel.this.versusButtons).getName());

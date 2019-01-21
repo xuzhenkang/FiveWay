@@ -20,9 +20,9 @@ import com.kang.util.I18NUtil;
 
 public class ChessBoard extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
-	
+
 	private I18NUtil i18nUtil;
-	
+
 	public static final int MARGIN = 40; // 边距
 	public static final int GRID_SPAN = 50; // 网格间距
 	public static final int ROWS = 4; // 棋盘行数
@@ -33,8 +33,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 	private int whiteChessNum;// 活着的白棋数量
 	private int endangeredBlackChessNum;// 当前受威胁的黑棋数量
 	private int endangeredWhiteChessNum;// 当前受威胁的白棋数量
-	
-	
+
 	Point[] chessList = new Point[2 * (COLS + 1)];
 	boolean isBlack = true; // 默认黑棋优先,是否该黑棋走
 	boolean gameOver = false; // 是否结束
@@ -42,7 +41,6 @@ public class ChessBoard extends JPanel implements MouseListener {
 	// 下棋轨迹
 	LinkedList<Point> track = new LinkedList<Point>();
 
-	
 	public int getBlackChessNum() {
 		return blackChessNum;
 	}
@@ -50,7 +48,8 @@ public class ChessBoard extends JPanel implements MouseListener {
 	private void setBlackChessNum() {
 		int n = 0;
 		for (Point p : chessList) {
-			if (p.getColor() == Color.BLACK && !p.isDead()) n++;
+			if (p.getColor() == Color.BLACK && !p.isDead())
+				n++;
 		}
 		this.blackChessNum = n;
 	}
@@ -62,7 +61,8 @@ public class ChessBoard extends JPanel implements MouseListener {
 	private void setWhiteChessNum() {
 		int n = 0;
 		for (Point p : chessList) {
-			if (p.getColor() == Color.WHITE && !p.isDead()) n++;
+			if (p.getColor() == Color.WHITE && !p.isDead())
+				n++;
 		}
 		this.blackChessNum = n;
 	}
@@ -105,8 +105,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 			if (i < chessList.length / 2) { // 前一半是白棋
 				chessList[i] = new Point(i, 0, Color.WHITE);
 			} else { // 后一半是黑棋
-				chessList[i] = new Point(i - chessList.length / 2, 4,
-						Color.BLACK);
+				chessList[i] = new Point(i - chessList.length / 2, 4, Color.BLACK);
 			}
 			chessList[i].setIndex(i);
 		}
@@ -122,7 +121,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 
 	public ChessBoard(StartChessJFrame parentJFrame) {
 		this.i18nUtil = I18NUtil.getInstance("ChessBoard", parentJFrame.getSystemConfig().getLanguage());
-		
+
 		img = Toolkit.getDefaultToolkit().getImage("images/board.jpg");
 		shadows = Toolkit.getDefaultToolkit().getImage("shadows.jpg");
 		/* 初始化棋子 */
@@ -159,12 +158,10 @@ public class ChessBoard extends JPanel implements MouseListener {
 		g.drawImage(img, x, y, null);
 		/* 画棋盘 */
 		for (int i = 0; i <= ROWS; i++) {
-			g.drawLine(MARGIN, MARGIN + i * GRID_SPAN, MARGIN + COLS
-					* GRID_SPAN, MARGIN + i * GRID_SPAN);
+			g.drawLine(MARGIN, MARGIN + i * GRID_SPAN, MARGIN + COLS * GRID_SPAN, MARGIN + i * GRID_SPAN);
 		}
 		for (int i = 0; i <= COLS; i++) {
-			g.drawLine(MARGIN + i * GRID_SPAN, MARGIN, MARGIN + i * GRID_SPAN,
-					MARGIN + ROWS * GRID_SPAN);
+			g.drawLine(MARGIN + i * GRID_SPAN, MARGIN, MARGIN + i * GRID_SPAN, MARGIN + ROWS * GRID_SPAN);
 		}
 		/* 画棋子 */
 		for (int i = 0; i < chessList.length; i++) {
@@ -176,39 +173,29 @@ public class ChessBoard extends JPanel implements MouseListener {
 			g.setColor(chessList[i].getColor()); // 设置颜色
 			colortemp = chessList[i].getColor();
 			if (colortemp == Color.black) { // 画黑棋
-				RadialGradientPaint paint = new RadialGradientPaint(xPos
-						- Point.DIAMETER / 2 + 25, yPos - Point.DIAMETER / 2
-						+ 10, 20, new float[] { 0f, 1f }, new Color[] {
-						Color.WHITE, Color.BLACK });
+				RadialGradientPaint paint = new RadialGradientPaint(xPos - Point.DIAMETER / 2 + 25,
+						yPos - Point.DIAMETER / 2 + 10, 20, new float[] { 0f, 1f },
+						new Color[] { Color.WHITE, Color.BLACK });
 				((Graphics2D) g).setPaint(paint);
-				((Graphics2D) g).setRenderingHint(
-						RenderingHints.KEY_ANTIALIASING,
-						RenderingHints.VALUE_ANTIALIAS_ON);
-				((Graphics2D) g).setRenderingHint(
-						RenderingHints.KEY_ALPHA_INTERPOLATION,
+				((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
 						RenderingHints.VALUE_ALPHA_INTERPOLATION_DEFAULT);
 			} else if (colortemp == Color.white) { // 画白棋
-				RadialGradientPaint paint = new RadialGradientPaint(xPos
-						- Point.DIAMETER / 2 + 25, yPos - Point.DIAMETER / 2
-						+ 10, 70, new float[] { 0f, 1f }, new Color[] {
-						Color.WHITE, Color.BLACK });
+				RadialGradientPaint paint = new RadialGradientPaint(xPos - Point.DIAMETER / 2 + 25,
+						yPos - Point.DIAMETER / 2 + 10, 70, new float[] { 0f, 1f },
+						new Color[] { Color.WHITE, Color.BLACK });
 				((Graphics2D) g).setPaint(paint);
-				((Graphics2D) g).setRenderingHint(
-						RenderingHints.KEY_ANTIALIASING,
-						RenderingHints.VALUE_ANTIALIAS_ON);
-				((Graphics2D) g).setRenderingHint(
-						RenderingHints.KEY_ALPHA_INTERPOLATION,
+				((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
 						RenderingHints.VALUE_ALPHA_INTERPOLATION_DEFAULT);
 			}
 
-			Ellipse2D e = new Ellipse2D.Float(xPos - Point.DIAMETER / 2, yPos
-					- Point.DIAMETER / 2, 34, 35);
+			Ellipse2D e = new Ellipse2D.Float(xPos - Point.DIAMETER / 2, yPos - Point.DIAMETER / 2, 34, 35);
 			((Graphics2D) g).fill(e);
 
 			if (chessList[i].isSelected()) { // 如果被选中，画红矩形框
 				g.setColor(Color.red);
-				g.drawRect(xPos - Point.DIAMETER / 2,
-						yPos - Point.DIAMETER / 2, 34, 35);
+				g.drawRect(xPos - Point.DIAMETER / 2, yPos - Point.DIAMETER / 2, 34, 35);
 			}
 		}
 	}
@@ -233,10 +220,8 @@ public class ChessBoard extends JPanel implements MouseListener {
 			return;
 		Point p;
 		// 如果x，y位置已经有棋子存在, 并且该棋子为我方棋子，则该棋子被选中
-		if ((p = findChess(xIndex, yIndex)) != null
-				&& findSelectedPoint(chessList) == null
-				&& (isBlack && p.getColor() == Color.black || !isBlack
-						&& p.getColor() == Color.white)) {
+		if ((p = findChess(xIndex, yIndex)) != null && findSelectedPoint(chessList) == null
+				&& (isBlack && p.getColor() == Color.black || !isBlack && p.getColor() == Color.white)) {
 			p.setSelected(true);
 			this.repaint();
 		}
@@ -244,20 +229,15 @@ public class ChessBoard extends JPanel implements MouseListener {
 		/* 在chessList中找到被选中的棋子，并返回 */
 		Point selectedPoint = findSelectedPoint(chessList);
 		/*
-		 * 若点击的位置与已经被选中的棋子的位置横纵网格坐标之差的绝对值都等于步长STEP，并且该位置不可以有对方棋子则可以落子，
-		 * 修改对应的横纵网格坐标
+		 * 若点击的位置与已经被选中的棋子的位置横纵网格坐标之差的绝对值都等于步长STEP，并且该位置不可以有对方棋子则可以落子， 修改对应的横纵网格坐标
 		 */
-		if (selectedPoint != null
-				&& (Math.abs(xIndex - selectedPoint.getX()) == STEP
-						&& Math.abs(yIndex - selectedPoint.getY()) == 0 || Math
-						.abs(yIndex - selectedPoint.getY()) == STEP
-						&& Math.abs(xIndex - selectedPoint.getX()) == 0)
+		if (selectedPoint != null && (Math.abs(xIndex - selectedPoint.getX()) == STEP
+				&& Math.abs(yIndex - selectedPoint.getY()) == 0
+				|| Math.abs(yIndex - selectedPoint.getY()) == STEP && Math.abs(xIndex - selectedPoint.getX()) == 0)
 				&& findChess(xIndex, yIndex) == null) {
 			// 记录上一步数据
-			selectedPoint.getPointTrack().add(
-					selectedPoint.new PointRecord(selectedPoint.getX(),
-							selectedPoint.getY(), selectedPoint.isSelected(),
-							selectedPoint.isDead()));
+			selectedPoint.getPointTrack().add(selectedPoint.new PointRecord(selectedPoint.getX(), selectedPoint.getY(),
+					selectedPoint.isSelected(), selectedPoint.isDead()));
 			// 设置该步数据
 			selectedPoint.setX(xIndex);
 			selectedPoint.setY(yIndex);
@@ -266,18 +246,16 @@ public class ChessBoard extends JPanel implements MouseListener {
 			// yIndex, ++stepCount));
 			track.add(selectedPoint);
 			selectedPoint.setSelected(false); // 设置选中选项为非。
-			eatOpposite(isBlack, chessList, selectedPoint.getX(),
-					selectedPoint.getY(), xIndex, yIndex);
+			eatOpposite(isBlack, chessList, selectedPoint.getX(), selectedPoint.getY(), xIndex, yIndex);
 			this.repaint();
 			if (isWin(isBlack)) {
-				String msg = String.format(i18nUtil.getText("congratulations") + " %s " + i18nUtil.getText("win"), colorName);
-				JOptionPane.showMessageDialog(this, msg, i18nUtil.getText("alert"),JOptionPane.INFORMATION_MESSAGE);
+				String msg = String.format(i18nUtil.getText("congratulations") + " %s " + i18nUtil.getText("win"),
+						colorName);
+				JOptionPane.showMessageDialog(this, msg, i18nUtil.getText("alert"), JOptionPane.INFORMATION_MESSAGE);
 				gameOver = true;
 			}
 			isBlack = !isBlack;
-		} else if (selectedPoint != null
-				&& (p = findChess(xIndex, yIndex)) != null
-				&& isMySide(p, isBlack)) {
+		} else if (selectedPoint != null && (p = findChess(xIndex, yIndex)) != null && isMySide(p, isBlack)) {
 			/* 如果已经选中我方一子selectedPoint，又点击我方另一子p，则选中我方的另一子p，selectedPoint取消选中 */
 			selectedPoint.setSelected(false);
 			p.setSelected(true);
@@ -331,76 +309,52 @@ public class ChessBoard extends JPanel implements MouseListener {
 	 * chesses棋子数组，myPointIndex我的棋子在chesses中的索引，myXIndex,myYIndex我当前的棋子的横纵坐标，
 	 * xIndex,yIndex我的棋子要落的位置网格索引
 	 */
-	private Point eatOpposite(boolean isBlack, Point[] chesses, int myXIndex,
-			int myYIndex, int toXIndex, int toYIndex) {
+	private Point eatOpposite(boolean isBlack, Point[] chesses, int myXIndex, int myYIndex, int toXIndex,
+			int toYIndex) {
 		Color currentColor = isBlack ? Color.BLACK : Color.WHITE;
 		Color oppositeColor = !isBlack ? Color.BLACK : Color.WHITE;
 		Point p, q; // p为我方另一子， q为被吃掉的子
 
 		/* 南北方向 */
-		if ((p = findChess(myXIndex, myYIndex + 1)) != null
-				&& p.getColor() == currentColor
-				&& (q = findChess(myXIndex, myYIndex + 2)) != null
-				&& q.getColor() == oppositeColor
-				&& !colHasOtherChess(myYIndex, myYIndex + 1, myYIndex + 2,
-						myXIndex, chesses)) {
+		if ((p = findChess(myXIndex, myYIndex + 1)) != null && p.getColor() == currentColor
+				&& (q = findChess(myXIndex, myYIndex + 2)) != null && q.getColor() == oppositeColor
+				&& !colHasOtherChess(myYIndex, myYIndex + 1, myYIndex + 2, myXIndex, chesses)) {
 			/* 判断如果该子下方的两个子都存在，且第一个是我方，第二个是彼方，并且该列无其他子，则吃掉彼方子 */
 			q.setDead(true);
-		} else if ((p = findChess(myXIndex, myYIndex - 1)) != null
-				&& p.getColor() == currentColor
-				&& (q = findChess(myXIndex, myYIndex - 2)) != null
-				&& q.getColor() == oppositeColor
-				&& !colHasOtherChess(myYIndex, myYIndex - 1, myYIndex - 2,
-						myXIndex, chesses)) {
+		} else if ((p = findChess(myXIndex, myYIndex - 1)) != null && p.getColor() == currentColor
+				&& (q = findChess(myXIndex, myYIndex - 2)) != null && q.getColor() == oppositeColor
+				&& !colHasOtherChess(myYIndex, myYIndex - 1, myYIndex - 2, myXIndex, chesses)) {
 			/* 判断如果该子下方和上方的两个子都存在，且上方是我方，下方是彼方，并且该列无其他子，则吃掉彼方子 */
 			q.setDead(true);
-		} else if ((p = findChess(myXIndex, myYIndex - 1)) != null
-				&& p.getColor() == currentColor
-				&& (q = findChess(myXIndex, myYIndex + 1)) != null
-				&& q.getColor() == oppositeColor
-				&& !colHasOtherChess(myYIndex, myYIndex - 1, myYIndex + 1,
-						myXIndex, chesses)) {
+		} else if ((p = findChess(myXIndex, myYIndex - 1)) != null && p.getColor() == currentColor
+				&& (q = findChess(myXIndex, myYIndex + 1)) != null && q.getColor() == oppositeColor
+				&& !colHasOtherChess(myYIndex, myYIndex - 1, myYIndex + 1, myXIndex, chesses)) {
 			/* 判断如果该子下方和上方的两个子都存在，且下方是我方，上方是彼方，并且该列无其他子，则吃掉彼方子 */
 			q.setDead(true);
-		} else if ((p = findChess(myXIndex, myYIndex + 1)) != null
-				&& p.getColor() == currentColor
-				&& (q = findChess(myXIndex, myYIndex - 1)) != null
-				&& q.getColor() == oppositeColor
-				&& !colHasOtherChess(myYIndex, myYIndex + 1, myYIndex - 1,
-						myXIndex, chesses)) {
+		} else if ((p = findChess(myXIndex, myYIndex + 1)) != null && p.getColor() == currentColor
+				&& (q = findChess(myXIndex, myYIndex - 1)) != null && q.getColor() == oppositeColor
+				&& !colHasOtherChess(myYIndex, myYIndex + 1, myYIndex - 1, myXIndex, chesses)) {
 			/* 判断如果该子上方的两个子都存在，且最上方是彼方，次上方是我方，并且该列无其他子，则吃掉彼方子 */
 			q.setDead(true);
 		}
 		/* 东西方向 */
-		else if ((p = findChess(myXIndex + 1, myYIndex)) != null
-				&& p.getColor() == currentColor
-				&& (q = findChess(myXIndex + 2, myYIndex)) != null
-				&& q.getColor() == oppositeColor
-				&& !rowHasOtherChess(myXIndex, myXIndex + 1, myXIndex + 2,
-						myYIndex, chesses)) {
+		else if ((p = findChess(myXIndex + 1, myYIndex)) != null && p.getColor() == currentColor
+				&& (q = findChess(myXIndex + 2, myYIndex)) != null && q.getColor() == oppositeColor
+				&& !rowHasOtherChess(myXIndex, myXIndex + 1, myXIndex + 2, myYIndex, chesses)) {
 			q.setDead(true);
-		} else if ((p = findChess(myXIndex - 1, myYIndex)) != null
-				&& p.getColor() == currentColor
-				&& (q = findChess(myXIndex - 2, myYIndex)) != null
-				&& q.getColor() == oppositeColor
-				&& !rowHasOtherChess(myXIndex, myXIndex - 1, myXIndex - 2,
-						myYIndex, chesses)) {
+		} else if ((p = findChess(myXIndex - 1, myYIndex)) != null && p.getColor() == currentColor
+				&& (q = findChess(myXIndex - 2, myYIndex)) != null && q.getColor() == oppositeColor
+				&& !rowHasOtherChess(myXIndex, myXIndex - 1, myXIndex - 2, myYIndex, chesses)) {
 			/* 判断如果该子下方和上方的两个子都存在，且上方是我方，下方是彼方，并且该列无其他子，则吃掉彼方子 */
 			q.setDead(true);
-		} else if ((p = findChess(myXIndex - 1, myYIndex)) != null
-				&& p.getColor() == currentColor
-				&& (q = findChess(myXIndex + 1, myYIndex)) != null
-				&& q.getColor() == oppositeColor
-				&& !rowHasOtherChess(myXIndex, myXIndex - 1, myXIndex + 1,
-						myYIndex, chesses)) {
+		} else if ((p = findChess(myXIndex - 1, myYIndex)) != null && p.getColor() == currentColor
+				&& (q = findChess(myXIndex + 1, myYIndex)) != null && q.getColor() == oppositeColor
+				&& !rowHasOtherChess(myXIndex, myXIndex - 1, myXIndex + 1, myYIndex, chesses)) {
 			/* 判断如果该子下方和上方的两个子都存在，且下方是我方，上方是彼方，并且该列无其他子，则吃掉彼方子 */
 			q.setDead(true);
-		} else if ((p = findChess(myXIndex + 1, myYIndex)) != null
-				&& p.getColor() == currentColor
-				&& (q = findChess(myXIndex - 1, myYIndex)) != null
-				&& q.getColor() == oppositeColor
-				&& !rowHasOtherChess(myXIndex, myXIndex + 1, myXIndex - 1,
-						myYIndex, chesses)) {
+		} else if ((p = findChess(myXIndex + 1, myYIndex)) != null && p.getColor() == currentColor
+				&& (q = findChess(myXIndex - 1, myYIndex)) != null && q.getColor() == oppositeColor
+				&& !rowHasOtherChess(myXIndex, myXIndex + 1, myXIndex - 1, myYIndex, chesses)) {
 			/* 判断如果该子上方的两个子都存在，且最上方是彼方，次上方是我方，并且该列无其他子，则吃掉彼方子 */
 			q.setDead(true);
 		} else
@@ -437,12 +391,10 @@ public class ChessBoard extends JPanel implements MouseListener {
 	}
 
 	/* 判断该行除了这三个点（x1,y,x2,y,x3,y）外的其他位置没有棋子,若有返回真，否则返回假 */
-	private boolean rowHasOtherChess(int x1, int x2, int x3, int y,
-			Point[] chesses) {
+	private boolean rowHasOtherChess(int x1, int x2, int x3, int y, Point[] chesses) {
 		int n = 0;
 		for (Point p : chesses) {
-			if (p.getY() == y && p.getX() != x1 && p.getX() != x2
-					&& p.getX() != x3 && !p.isDead()) {
+			if (p.getY() == y && p.getX() != x1 && p.getX() != x2 && p.getX() != x3 && !p.isDead()) {
 				n++;
 			}
 		}
@@ -453,12 +405,10 @@ public class ChessBoard extends JPanel implements MouseListener {
 	}
 
 	/* 判断该列除了这三个点（x,y1,y2,y3）外的其他位置没有棋子,若有返回真，否则返回假 */
-	private boolean colHasOtherChess(int y1, int y2, int y3, int x,
-			Point[] chesses) {
+	private boolean colHasOtherChess(int y1, int y2, int y3, int x, Point[] chesses) {
 		int n = 0;
 		for (Point p : chesses) {
-			if (p.getX() == x && p.getY() != y1 && p.getY() != y2
-					&& p.getY() != y3 && !p.isDead()) {
+			if (p.getX() == x && p.getY() != y1 && p.getY() != y2 && p.getY() != y3 && !p.isDead()) {
 				n++;
 			}
 		}

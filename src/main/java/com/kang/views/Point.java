@@ -74,8 +74,8 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return "[index:" + index + ",x:" + x + ",y:" + y + ",isDead:" + isDead
-				+ ",isSelected:" + isSelected + ",color:" + color + "]";
+		return "[index:" + index + ",x:" + x + ",y:" + y + ",isDead:" + isDead + ",isSelected:" + isSelected + ",color:"
+				+ color + "]";
 	}
 
 	// 每步数据记录
@@ -84,6 +84,7 @@ public class Point {
 		int y;
 		boolean isSelected;
 		boolean isDead;
+
 		public PointRecord(int x, int y, boolean isSelected, boolean isDead) {
 			this.x = x;
 			this.y = y;
@@ -96,8 +97,7 @@ public class Point {
 		if (pointTrack.size() != 0) {
 			int n = 0;
 			for (PointRecord c : pointTrack) {
-				System.out.print("c[" + n + "](" + c.x + "," + c.y + ","
-						+ c.isDead + "," + c.isSelected + ")");
+				System.out.print("c[" + n + "](" + c.x + "," + c.y + "," + c.isDead + "," + c.isSelected + ")");
 				n++;
 			}
 			System.out.println();
