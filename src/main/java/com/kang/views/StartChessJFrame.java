@@ -7,10 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,14 +16,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.kang.entities.SystemConfig;
+import com.kang.entities.GlobalSystemConfig;
 import com.kang.util.I18NUtil;
 
 public class StartChessJFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
-
-	private String systemConfigPath = "SystemConfig.obj";
-	private SystemConfig systemConfig = new SystemConfig();
 	private I18NUtil i18nUtil;
 
 	private ChessBoard chessBoard;
@@ -38,25 +31,7 @@ public class StartChessJFrame extends JFrame {
 	private JMenuItem startMenuItem, exitMenuItem, backMenuItem, showMenuItem, configMenuItem;
 
 	private void init() {
-		File configFile = new File(systemConfigPath);
-		if (configFile.exists()) {
-			ObjectInputStream ois = null;
-			try {
-				ois = new ObjectInputStream(new FileInputStream(configFile));
-				this.systemConfig = (SystemConfig) ois.readObject();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} finally {
-				try {
-					ois.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		this.i18nUtil = I18NUtil.getInstance("StartChess", this.systemConfig.getLanguage());
+		this.i18nUtil = I18NUtil.getInstance("StartChess", GlobalSystemConfig.getInstance().getSystemConfig().getLanguage());
 	}
 
 	public StartChessJFrame() {
@@ -163,14 +138,6 @@ public class StartChessJFrame extends JFrame {
 				new SystemConfigJFrame(StartChessJFrame.this);
 			}
 		}
-	}
-
-	public String getSystemConfigPath() {
-		return systemConfigPath;
-	}
-
-	public SystemConfig getSystemConfig() {
-		return systemConfig;
 	}
 
 	public static void main(String[] args) {

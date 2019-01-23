@@ -5,15 +5,12 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
-import com.kang.entities.SystemConfig;
+import com.kang.entities.GlobalSystemConfig;
 import com.kang.util.I18NUtil;
 
 public class SystemConfigJFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	private SystemConfig systemConfig;
-	
-	
 	private I18NUtil i18nUtil;
 	
 	private StartChessJFrame parentFrame; // 父窗口
@@ -22,8 +19,7 @@ public class SystemConfigJFrame extends JFrame {
 	public SystemConfigJFrame(StartChessJFrame parentFrame) {
 
 		this.parentFrame = parentFrame;
-		this.systemConfig = parentFrame.getSystemConfig();
-		this.i18nUtil = I18NUtil.getInstance("SystemConfig", this.systemConfig.getLanguage());
+		this.i18nUtil = I18NUtil.getInstance("SystemConfig", GlobalSystemConfig.getInstance().getSystemConfig().getLanguage());
 		
 		systemConfigPanel = new SystemConfigPanel(this);
 		this.add(systemConfigPanel);
@@ -42,8 +38,5 @@ public class SystemConfigJFrame extends JFrame {
 	}
 	public StartChessJFrame getParentFrame() {
 		return parentFrame;
-	}
-	public SystemConfig getSystemConfig() {
-		return systemConfig;
 	}
 }

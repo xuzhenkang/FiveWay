@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.kang.entities.GlobalSystemConfig;
 import com.kang.util.I18NUtil;
 
 public class ChessBoard extends JPanel implements MouseListener {
@@ -120,7 +121,7 @@ public class ChessBoard extends JPanel implements MouseListener {
 	Color colortemp;
 
 	public ChessBoard(StartChessJFrame parentJFrame) {
-		this.i18nUtil = I18NUtil.getInstance("ChessBoard", parentJFrame.getSystemConfig().getLanguage());
+		this.i18nUtil = I18NUtil.getInstance("ChessBoard", GlobalSystemConfig.getInstance().getSystemConfig().getLanguage());
 
 		img = Toolkit.getDefaultToolkit().getImage("images/board.jpg");
 		shadows = Toolkit.getDefaultToolkit().getImage("shadows.jpg");

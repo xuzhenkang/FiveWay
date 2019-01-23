@@ -4,9 +4,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.Locale;
 
 import javax.swing.AbstractButton;
@@ -17,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import com.kang.entities.GlobalSystemConfig;
 import com.kang.entities.SystemConfig;
 import com.kang.util.I18NUtil;
 
@@ -24,7 +22,6 @@ public class SystemConfigPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private SystemConfigJFrame parentJFrame;
 	private I18NUtil i18nUtil;
-	private String systemConfigPath;
 	private SystemConfig systemConfig;
 	
 	private JPanel ipAddrPanel;
@@ -148,8 +145,7 @@ public class SystemConfigPanel extends JPanel {
 	 */
 	private void init(SystemConfigJFrame parentJFrame) {
 		this.parentJFrame = parentJFrame;
-		this.systemConfigPath = parentJFrame.getParentFrame().getSystemConfigPath();
-		this.systemConfig = parentJFrame.getSystemConfig();
+		this.systemConfig = GlobalSystemConfig.getInstance().getSystemConfig();
 		this.i18nUtil = I18NUtil.getInstance("SystemConfig", this.systemConfig.getLanguage());
 	}
 
@@ -172,7 +168,7 @@ public class SystemConfigPanel extends JPanel {
 				SystemConfigPanel.this.systemConfig.setVersus(this.getSelected(SystemConfigPanel.this.versusButtons).getName());
 				SystemConfigPanel.this.systemConfig.setIpAddr(SystemConfigPanel.this.ipAddrField.getText());;
 				SystemConfigPanel.this.systemConfig.setLanguage(this.getSelected(SystemConfigPanel.this.languageButtons).getName());
-				this.saveSystemConfig(SystemConfigPanel.this.systemConfig);
+				GlobalSystemConfig.getInstance().saveSystemConfig();
 				this.exit();
 			} else if (obj == SystemConfigPanel.this.cancelButton) {
 				this.exit();
@@ -194,27 +190,6 @@ public class SystemConfigPanel extends JPanel {
 				}
 			}
 			return null;
-		}
-		
-		/**
-		 * 保存系统设置
-		 * @param systemConfig
-		 */
-		private void saveSystemConfig(SystemConfig systemConfig) {
-	        //Write Obj to File
-	        ObjectOutputStream oos = null;
-	        try {
-	            oos = new ObjectOutputStream(new FileOutputStream(systemConfigPath));
-	            oos.writeObject(systemConfig);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        } finally {
-	            try {
-					oos.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-	        }
 		}
 	}
 }
