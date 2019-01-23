@@ -36,6 +36,8 @@ public class GlobalSystemConfig {
 					e.printStackTrace();
 				}
 			}
+		} else {
+			this.systemConfig = new SystemConfig();
 		}
 	}
 	
