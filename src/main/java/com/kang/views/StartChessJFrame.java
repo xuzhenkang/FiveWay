@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.kang.entities.GlobalSystemConfig;
-import com.kang.util.I18NUtil;
+import com.kang.utils.I18NUtil;
 
 public class StartChessJFrame extends JFrame {
 	private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package com.kang.util;
+package com.kang.utils;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;

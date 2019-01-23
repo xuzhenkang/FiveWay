@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-import com.kang.util.NetWorkUtil;
+import com.kang.utils.NetWorkUtil;
 
 public class SystemConfig implements Serializable {
 	

@@ -6,7 +6,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 import com.kang.entities.GlobalSystemConfig;
-import com.kang.util.I18NUtil;
+import com.kang.utils.I18NUtil;
 
 public class SystemConfigJFrame extends JFrame {
 	

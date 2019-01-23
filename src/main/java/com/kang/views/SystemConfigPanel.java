@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 import com.kang.entities.GlobalSystemConfig;
 import com.kang.entities.SystemConfig;
-import com.kang.util.I18NUtil;
+import com.kang.utils.I18NUtil;
 
 public class SystemConfigPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
